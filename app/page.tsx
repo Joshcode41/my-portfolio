@@ -1,65 +1,146 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Sun, Moon } from "lucide-react";
 
 export default function Home() {
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", dark);
+  }, [dark]);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="container">
+      {/* THEME TOGGLE */}
+      <div className="themeToggle" onClick={() => setDark(!dark)}>
+        {dark ? <Sun /> : <Moon />}
+      </div>
+
+      {/* HERO + BIO */}
+      <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <div className="bio">
+          <div>
+            <h1>Joshua Owuonda</h1>
+            <p>Junior Software Developer </p>
+            <p> 0100 Nairobi, Kenya</p>
+            
+
+            <div className="buttons">
+              <button
+                onClick={() =>
+                  document
+                    .getElementById("contact")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                Contact Me
+              </button>
+
+              <button
+                onClick={() =>
+                  window.open("/Joshua_Owuonda_CV.pdf", "_blank")
+                }
+              >
+                Download CV
+              </button>
+            </div>
+          </div>
+
+          <img src="/images/profile.jpg" alt="Joshua Owuonda" className="profileImage" />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </motion.section>
+
+      {/* PROFESSIONAL SUMMARY */}
+      <section>
+        <h2>Professional Summary</h2>
+        <p>
+          Detail-oriented IT undergraduate seeking an internship in Software or Web Development.
+          Skilled in full-stack development, database design, and system implementation.
+          Proficient in React.js, Node.js, PHP, PostgreSQL, REST APIs, and responsive web design.
+          Committed to delivering data-driven solutions and continuous learning.
+        </p>
+      </section>
+
+      {/* EDUCATION */}
+      <section>
+        <h2>Education</h2>
+        <p><strong>Bachelor of Business with Information Technology</strong></p>
+        <p>Strathmore University, Nairobi, Kenya</p>
+        <p>Expected Graduation: June 2027 | Year of Study: 3</p>
+      </section>
+
+      {/* COURSEWORK */}
+      <section>
+        <h2>Relevant Coursework</h2>
+        <ul>
+          <li>Software Engineering</li>
+          <li>Database Management Systems</li>
+          <li>Object-Oriented Programming</li>
+          <li>Web Application Development</li>
+          <li>Systems Analysis and Design</li>
+        </ul>
+      </section>
+
+      {/* TECHNICAL SKILLS */}
+      <section>
+        <h2>Technical Skills</h2>
+        <ul>
+          <li>Programming Languages: PHP, Java, Python, SQL, JavaScript, TypeScript, Kotlin, C, C++, C#</li>
+          <li>Web & Application Development: HTML5, CSS3, Bootstrap, React.js, Node.js, REST APIs</li>
+          <li>Databases & Cloud: MySQL, PostgreSQL, Firebase, OracleDB, phpMyAdmin</li>
+          <li>Tools & Platforms: Git, GitHub, GitLab, VS Code, NetBeans, Android Studio, XAMPP</li>
+          <li>Systems & Networking: Basic networking, system configuration, troubleshooting</li>
+        </ul>
+      </section>
+
+      {/* PROJECTS */}
+      <section>
+        <h2>Projects</h2>
+
+        <div className="project">
+          <h3>University Academic Performance Management System (UAPMS)</h3>
+          <p>React.js | Node.js | PostgreSQL | Chart.js | PHP</p>
+          <ul>
+            <li>Developed a web-based academic tracking system centralizing GPA, attendance, course enrollment, and notifications.</li>
+            <li>Built interactive dashboards with GPA trends and personalized alerts.</li>
+            <li>Created backend services for GPA calculation and course registration workflows.</li>
+            <li>Integrated PostgreSQL for secure real-time data storage and analytics.</li>
+            <li>Designed role-specific dashboards for students, lecturers, and administrators.</li>
+          </ul>
+          <img src="/images/uapms.jpg" alt="UAPMS project" />
         </div>
-      </main>
-    </div>
+
+        <div className="project">
+          <h3>Online Appointment Scheduling System</h3>
+          <p>PHP | MySQL | HTML | CSS | JavaScript</p>
+          <ul>
+            <li>Developed a full-stack appointment management system with authentication.</li>
+            <li>Implemented CRUD operations for users and schedules.</li>
+            <li>Built a responsive interface for desktop and mobile users.</li>
+            <li>Integrated MySQL for efficient data management.</li>
+            <li>Optimized performance to support 50+ concurrent users.</li>
+          </ul>
+          <img src="/images/appointments.jpg" alt="Appointment system project" />
+        </div>
+      </section>
+
+      {/* CONTACT */}
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>Phone: +254 799 732 318</p>
+        <p>Email: joshuaowuonda41@gmail.com</p>
+
+        <div className="socials">
+          <a href="https://github.com/Joshcode41" target="_blank">GitHub</a>
+          <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+        </div>
+      </section>
+
+      <footer>
+        © {new Date().getFullYear()} Joshua Owuonda. All rights reserved.
+      </footer>
+    </main>
   );
 }
