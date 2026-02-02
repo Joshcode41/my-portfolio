@@ -8,20 +8,12 @@ export const metadata: Metadata = {
   title: "Joshua Owuonda | Software Developer",
   description:
     "Junior Software Developer and IT Undergraduate specializing in full-stack web development and software engineering.",
-  keywords: [
-    "Joshua Owuonda",
-    "Software Developer",
-    "Web Developer",
-    "Next.js",
-    "React",
-    "Full Stack Developer",
-    "Kenya",
-  ],
+  metadataBase: new URL("https://my-portfolio-wine-chi-45.vercel.app"), // fixes Open Graph warning
   openGraph: {
     title: "Joshua Owuonda | Software Developer",
     description:
       "Portfolio of Joshua Owuonda, a junior software developer specializing in modern web applications.",
-    url: "https://your-vercel-domain.vercel.app",
+    url: "https://my-portfolio-wine-chi-45.vercel.app",
     siteName: "Joshua Owuonda Portfolio",
     images: [
       {
@@ -43,7 +35,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={styles.body}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={true} // respects system preference
+          storageKey="theme" // persists user preference
+        >
           <Navbar />
           <div className={styles.container}>{children}</div>
         </ThemeProvider>
