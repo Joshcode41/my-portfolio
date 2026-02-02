@@ -1,20 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { Button } from "./ui/button";
 import styles from "./Navbar.module.css";
 
-const sections = [
-  { id: "home", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "soft-skills", label: "Soft Skills" },
-  { id: "languages", label: "Languages" },
-  { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
-];
+interface NavbarProps {
+  dark: boolean;
+  setDark: Dispatch<SetStateAction<boolean>>;
+}
 
-export default function Navbar() {
+export default function Navbar({ dark, setDark }: NavbarProps) {
   const [active, setActive] = useState("home");
 
   const handleScroll = (id: string) => {
@@ -23,35 +18,38 @@ export default function Navbar() {
   };
 
   useEffect(() => {
+    const sections = ["home", "about", "skills", "projects", "contact"];
     const onScroll = () => {
       const scrollPos = window.scrollY + 150;
-      sections.forEach(({ id }) => {
-        const el = document.getElementById(id);
-        if (
-          el &&
-          el.offsetTop <= scrollPos &&
-          el.offsetTop + el.offsetHeight > scrollPos
-        ) {
-          setActive(id);
+      for (const sec of sections) {
+        const el = document.getElementById(sec);
+        if (el && el.offsetTop <= scrollPos && el.offsetTop + el.offsetHeight > scrollPos) {
+          setActive(sec);
         }
-      });
+      }
     };
-
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <nav className={styles.navbar}>
-      {sections.map(({ id, label }) => (
+    <nav
+      className={`${styles.navbar} fixed w-full bg-white dark:bg-gray-900 z-50 py-2 px-6 flex gap-3 shadow`}
+    >
+      {["home", "about", "skills", "projects", "contact"].map((sec) => (
         <Button
-          key={id}
-          onClick={() => handleScroll(id)}
-          className={active === id ? styles.active : ""}
+          key={sec}
+          variant={active === sec ? "default" : "outline"}
+          onClick={() => handleScroll(sec)}
         >
-          {label}
+          {sec.charAt(0).toUpperCase() + sec.slice(1)}
         </Button>
       ))}
+
+      {/* Dark mode toggle button */}
+      <Button onClick={() => setDark(!dark)}>
+        {dark ? "Light Mode" : "Dark Mode"}
+      </Button>
     </nav>
   );
 }
