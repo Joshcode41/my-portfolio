@@ -20,11 +20,9 @@ import ContactForm from "@/components/ContactForm";
 import Navbar from "@/components/Navbar";
 
 export default function Home() {
-  const [dark, setDark] = useState(false);
 
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", dark);
-  }, [dark]);
+
+ 
 
   // Fade animation variants
   const fadeVariants = {
@@ -66,7 +64,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       {/* NAVBAR */}
-      <Navbar dark={dark} setDark={setDark} />
+      <Navbar />
 
       {/* HERO */}
       <section
@@ -83,9 +81,7 @@ export default function Home() {
         <p className="mb-6">0100-Nairobi, Kenya</p>
 
         <div className="flex gap-4 flex-wrap justify-center">
-          <Button onClick={() => setDark(!dark)}>
-            {dark ? <Sun size={18} /> : <Moon size={18} />}
-          </Button>
+          
           <Button
             onClick={() =>
               document

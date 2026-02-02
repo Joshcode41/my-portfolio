@@ -1,16 +1,13 @@
 "use client";
 
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import { Button } from "./ui/button";
 import styles from "./Navbar.module.css";
 
-interface NavbarProps {
-  dark: boolean;
-  setDark: Dispatch<SetStateAction<boolean>>;
-}
-
-export default function Navbar({ dark, setDark }: NavbarProps) {
+export default function Navbar() {
   const [active, setActive] = useState("home");
+  const { theme, setTheme } = useTheme();
 
   const handleScroll = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -19,15 +16,21 @@ export default function Navbar({ dark, setDark }: NavbarProps) {
 
   useEffect(() => {
     const sections = ["home", "about", "skills", "projects", "contact"];
+
     const onScroll = () => {
       const scrollPos = window.scrollY + 150;
       for (const sec of sections) {
         const el = document.getElementById(sec);
-        if (el && el.offsetTop <= scrollPos && el.offsetTop + el.offsetHeight > scrollPos) {
+        if (
+          el &&
+          el.offsetTop <= scrollPos &&
+          el.offsetTop + el.offsetHeight > scrollPos
+        ) {
           setActive(sec);
         }
       }
     };
+
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -46,9 +49,12 @@ export default function Navbar({ dark, setDark }: NavbarProps) {
         </Button>
       ))}
 
-      {/* Dark mode toggle button */}
-      <Button onClick={() => setDark(!dark)}>
-        {dark ? "Light Mode" : "Dark Mode"}
+      {/* REAL DARK MODE TOGGLE */}
+      <Button
+        variant="outline"
+        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      >
+        {theme === "dark" ? "Light Mode" : "Dark Mode"}
       </Button>
     </nav>
   );
