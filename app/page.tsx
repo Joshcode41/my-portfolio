@@ -28,7 +28,7 @@ const fadeUp = {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.6,  ease: [0.16, 1, 0.3, 1]},
     },
   };
 
@@ -57,7 +57,7 @@ export default function Home() {
           animate="visible"
           variants={fadeUp}
           transition={{ duration: 0.6 }}
-           variants={fadeVariants}
+           
         >
           <h1 className="text-4xl md:text-6xl font-bold">Joshua Owuonda</h1>
           <p className="text-xl text-gray-600 dark:text-gray-300">
@@ -115,7 +115,7 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-           variants={fadeVariants}
+          
         />
       </section>
 
@@ -126,7 +126,7 @@ export default function Home() {
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
-         variants={fadeVariants}
+        
       >
         <h2 className="text-2xl font-semibold flex items-center gap-2">
           <User size={20} /> About Me
@@ -145,7 +145,7 @@ export default function Home() {
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
-         variants={fadeVariants}
+         
       >
         <h2 className="text-2xl font-semibold flex items-center gap-2">
           <GraduationCap size={20} /> Education
@@ -164,7 +164,7 @@ export default function Home() {
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
-         variants={fadeVariants}
+         
       >
         <h2 className="text-2xl font-semibold flex items-center gap-2">
           <Wrench size={20} /> Technical Skills
@@ -214,7 +214,7 @@ export default function Home() {
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
-         variants={fadeVariants}
+         
       >
         <h2 className="text-2xl font-semibold flex items-center gap-2 mb-8">
           <FolderGit2 size={20} /> Projects
@@ -227,7 +227,7 @@ export default function Home() {
             alt="UAPMS Project"
             loading="lazy"
             className="w-full max-h-64 object-cover rounded-md mb-4"
-             variants={fadeVariants}
+             
           />
 
           <h3 className="font-semibold text-lg">
@@ -277,7 +277,7 @@ export default function Home() {
             alt="Appointment Scheduling System"
             loading="lazy"
             className="w-full max-h-64 object-cover rounded-md mb-4"
-             variants={fadeVariants}
+            
           />
 
           <h3 className="font-semibold text-lg">
@@ -329,7 +329,7 @@ export default function Home() {
   initial="hidden"
   whileInView="visible"
   viewport={{ once: false, amount: 0.2 }}
-  variants={fadeVariants}
+
 >
   <h2 className="text-2xl font-semibold mb-4">Languages</h2>
 
@@ -354,7 +354,7 @@ export default function Home() {
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
-         variants={fadeVariants}
+         
       >
         <h2 className="text-2xl font-semibold flex items-center gap-2">
           <Mail size={20} /> Contact
